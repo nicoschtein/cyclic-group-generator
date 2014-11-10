@@ -1,4 +1,7 @@
-cyclic-group-generator
+Cyclic Group Generator
 ======================
 
-Cyclic Group Generator
+
+
+
+To contribute please Fork and submit as many PRs as you like
