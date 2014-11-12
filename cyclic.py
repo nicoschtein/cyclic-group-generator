@@ -1,18 +1,29 @@
-# cyclicGroup = [0, 1, 2, 3, 4, 5]
-cyclicGroup = [0, 1, 2, 3, 4]
+import copy
+import sys	
+import collections
+
+#init
+cyclicGroup=copy.deepcopy(sys.argv);
+showLogs=0
+if(cyclicGroup[1] == "debug"):
+	showLogs=1
+	cyclicGroup.pop(1)
+cyclicGroup.remove(cyclicGroup[0])
 cyclicGroup.sort()
-debug = 1
-for number in cyclicGroup:
-	auxCyclicGroup = []
-	if debug:
+	
+def checkIfNumberIsGenerator(number):
+	if showLogs:
 		print "testing number: " + str(number)
 	for testGen in xrange(1, len(cyclicGroup) + 1):
-		if debug:
-			print "    testgen: " + str(testGen)
-		congruent = (number * testGen) % len(cyclicGroup)
-		auxCyclicGroup.append(congruent)
-		if debug:
+		congruent = (int(number) * testGen) % len(cyclicGroup)
+		auxCyclicGroup.append(str(congruent))
+		if showLogs:
 			print "    cic: " + str(auxCyclicGroup)
-	auxCyclicGroup.sort()
-	if cyclicGroup == auxCyclicGroup:
+	auxCyclicGroup.sort() 
+	return collections.Counter(cyclicGroup) == collections.Counter(auxCyclicGroup)
+
+for number in cyclicGroup:
+	auxCyclicGroup = []
+	if checkIfNumberIsGenerator(number):
 		print "  Number " + str(number) + " is generator!"
+	
