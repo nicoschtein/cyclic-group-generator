@@ -6,8 +6,8 @@ if len(sys.argv) == 1:
 	print "\n#################################"
 	print "# Cyclic Group Generator Finder #"
 	print "#################################\n"
-	print "Usage  : " + sys.argv[0] + " --debug (optional) [group list] (required)"
-	print "Example: " + sys.argv[0] + " --debug 0 1 2 3 4\n"
+	print "Usage  : " + sys.argv[0] + " debug (optional) [group list] (required)"
+	print "Example: " + sys.argv[0] + " debug 1 2 3 4\n"
 	sys.exit(0)
 
 #init
