@@ -7,7 +7,9 @@ if len(sys.argv) == 1:
 	print "# Cyclic Group Generator Finder #"
 	print "#################################\n"
 	print "Usage  : " + sys.argv[0] + " debug (optional) [group list] (required)"
-	print "Example: " + sys.argv[0] + " debug 1 2 3 4\n"
+	print "Usage  : " + sys.argv[0] + " debug (optional) [Z order] (required)\n"
+	print "Example: " + sys.argv[0] + " debug 1 2 3 4"
+	print "Example: " + sys.argv[0] + " debug 5\n"
 	sys.exit(0)
 
 #init
@@ -17,8 +19,14 @@ if(cyclicGroup[1] == "debug"):
 	showLogs=1
 	cyclicGroup.pop(1)
 cyclicGroup.remove(cyclicGroup[0])
+cyclicGroup = map(int, cyclicGroup)
 cyclicGroup.sort()
-	
+
+if len(cyclicGroup) == 1:
+	if showLogs:
+		print "Using Z" + str(cyclicGroup[0]) + str(cyclicGroup)
+	cyclicGroup = range(1,int(cyclicGroup[0]))
+
 def checkIfNumberIsGenerator(number):
 	if showLogs:
 		print "testing number: " + str(number)
@@ -27,7 +35,7 @@ def checkIfNumberIsGenerator(number):
 		if showLogs:
 			print "    ("+ str(cycle) +") accum: " + str(accum)
 		accum = (int(accum) * int(number)) % (len(cyclicGroup) + 1)
-		auxCyclicGroup.append(str(accum))
+		auxCyclicGroup.append(accum)
 		if showLogs:
 			print "    cic: " + str(auxCyclicGroup)
 	auxCyclicGroup.sort() 
@@ -37,4 +45,6 @@ for number in cyclicGroup:
 	auxCyclicGroup = []
 	if checkIfNumberIsGenerator(number):
 		print "  Number " + str(number) + " is generator!"
-	
+	else:
+		if showLogs:
+			print "  Number " + str(number) + " is not a generator."
